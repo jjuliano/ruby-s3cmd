@@ -1,0 +1,19 @@
+README for ruby-s3cmd
+=====================
+
+Ruby-s3cmd is a gem providing a ruby interface to s3cmd Amazon S3 client.
+
+To install, type 'gem install ruby-s3cmd'
+
+Usage:
+
+  require 'rubygems'
+  require 'ruby-s3cmd'
+
+  s3cmd = RubyS3Cmd::S3Cmd.new
+  s3cmd.exclude = "*.jpg"
+  s3cmd.rinclude = "[0-9].*.jpg"
+  s3cmd.show_config
+ => "s3cmd --exclude *.jpg --rinclude [0-9].*.jpg "
+  s3cmd.sync("/local/path", "s3://test-bucket/backup/")
+

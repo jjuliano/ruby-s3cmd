@@ -1,0 +1,47 @@
+commit dc9430c54968dd5c0d9ec665f7d12c4fa0be142a
+Author: Joel Bryan Juliano <jjuliano@clinic-it.com>
+Date:   Tue Dec 28 15:11:50 2010 +0800
+
+    Fix comments and documentations
+
+commit 8e2c880131ea108695d6f8dd9e59cca0973c58ec
+Author: Joel Bryan Juliano <jjuliano@clinic-it.com>
+Date:   Tue Dec 28 13:09:10 2010 +0800
+
+    Removed the yardoc documentations
+
+commit 447bf1cb796f3601ba1809e09045f443d724dbee
+Author: Joel Bryan Juliano <jjuliano@clinic-it.com>
+Date:   Tue Dec 28 12:29:02 2010 +0800
+
+    Added yardoc API documentation
+
+commit 20174fe74c38d47dc7b5ae5d9d673e68ca085a2c
+Author: Joel Bryan Juliano <jjuliano@clinic-it.com>
+Date:   Tue Dec 28 12:27:27 2010 +0800
+
+    bump to version 0.1.1
+
+commit 914690cbaee71217f78deeb48a204ffe8c098bcc
+Author: Joel Bryan Juliano <jjuliano@clinic-it.com>
+Date:   Tue Dec 28 11:55:44 2010 +0800
+
+    changed the version module name
+
+commit f1655df0fd2b0fa0e7b313d6140814220f468654
+Author: Joel Bryan Juliano <jjuliano@clinic-it.com>
+Date:   Mon Dec 27 19:52:32 2010 +0000
+
+    Added basic usage instructions
+
+commit dcda2467fc9f4b51807ac94898f252454500ad7f
+Author: Joel Bryan Juliano <jjuliano@clinic-it.com>
+Date:   Mon Dec 27 19:15:24 2010 +0000
+
+    Added github page as homepage in gemspec
+
+commit 164d7524024ec1f7ccd9d308943b3d8790a61316
+Author: Joel Bryan Juliano <jjuliano@clinic-it.com>
+Date:   Mon Dec 27 19:10:30 2010 +0000
+
+    Initial Commit
