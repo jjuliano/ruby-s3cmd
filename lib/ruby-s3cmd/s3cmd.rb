@@ -223,55 +223,17 @@
     attr_accessor :path_to_s3cmd
 
     #
-    # Returns a new RubyS3CMD::S3Cmd Object
-    #
-    def initialize()
-    end
-
-    #
     # Show the help message and exit
     #
     def help
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "--help " + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+     send_command "--help"
     end
 
     #
     # Show s3cmd version and exit.
     #
     def version
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "--version " + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+     send_command "--version"
     end
 
     #
@@ -279,435 +241,124 @@
     # runs.
     #
     def configure
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "--configure " + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+     send_command "--configure"
     end
 
     #
     # Dump current configuration after parsing config files and command line options and exit.
     #
     def dump_config
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "--dump-config " + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+       send_command "--dump-config"
     end
 
     # Make bucket
     def mb(bucket) # s3://BUCKET
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "mb " + bucket.to_s + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+      send_command "mb", bucket
     end
 
     # Remove bucket
     def rb(bucket) # s3://BUCKET
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "rb " + bucket.to_s + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+      send_command "rb", bucket
     end
 
     # List objects or buckets
     def ls(bucket) # s3://BUCKET[/PREFIX]]
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "ls " + bucket.to_s + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+      send_command "ls", bucket
     end
 
     # List all object in all buckets
     def la
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "la " + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+      send_command "la"
     end
 
     # Put file into bucket (i.e. upload to S3)
     def put(files, bucket) # FILE [FILE...] s3://BUCKET[/PREFIX]
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "put " + files.to_s + " " + bucket.to_s + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+      send_command "put", files, bucket
     end
 
     # Get file from bucket (i.e. download from S3)
-    def get(bucket, local_file) # s3://BUCKET/OBJECT LOCAL_FILE
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "get " + bucket.to_s + " " + local_file.to_s + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+    def get(bucket, local_file=nil) # s3://BUCKET/OBJECT LOCAL_FILE
+      send_command "get", bucket, local_file
     end
 
     # Delete file from bucket
     def del(bucket) # s3://BUCKET/OBJECT
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "del " + bucket.to_s + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+      send_command "del"
     end
 
     # Backup a directory tree to S3
     # Restore a tree from S3 to local directory
-    def sync(src_object, dest_object) # LOCAL_DIR s3://BUCKET[/PREFIX] or s3://BUCKET[/PREFIX] LOCAL_DIR
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "sync " + src_object.to_s + " " + dest_object.to_s + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+    def sync(src_object, dest_object=nil) # LOCAL_DIR s3://BUCKET[/PREFIX] or s3://BUCKET[/PREFIX] LOCAL_DIR
+      send_command "sync", src_object, dest_object
     end
 
     # Make a copy of a file (cp) or move a file (mv).  Destination can be in the same bucket with  a  dif‐
     # ferent name or in another bucket with the same or different name.  Adding --acl-public will make the
     # destination object publicly accessible (see below).
     def cp(src_bucket, dest_bucket) # s3://BUCKET1/OBJECT1 s3://BUCKET2[/OBJECT2]
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "cp " + src_bucket.to_s + " " + dest_bucket.to_s + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+      send_command "cp", src_bucket, dest_bucket
     end
 
     # Make a copy of a file (cp) or move a file (mv).  Destination can be in the same bucket with  a  dif‐
     # ferent name or in another bucket with the same or different name.  Adding --acl-public will make the
     # destination object publicly accessible (see below).
     def mv(src_bucket, dest_bucket) # s3://BUCKET1/OBJECT1 s3://BUCKET2[/OBJECT2]
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "mv " + src_bucket.to_s + " " + dest_bucket.to_s + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+      send_command "mv", src_bucket, dest_bucket
     end
 
     # Modify Access control list for Bucket or Files. Use with --acl-public or --acl-private
     def setacl(bucket) # s3://BUCKET[/OBJECT]
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "setacl " + bucket.to_s + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+      send_command "setacl", bucket
     end
 
     # Get various information about a Bucket or Object
     def info(bucket) # s3://BUCKET[/OBJECT]
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "info " + bucket.to_s + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+      send_command "info", bucket
     end
 
     # Disk usage - amount of data stored in S3
     def du(bucket) # [s3://BUCKET[/PREFIX]]
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "du " + bucket.to_s + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+      send_command "du", bucket
     end
 
     # Commands for CloudFront management
 
     # List CloudFront distribution points
     def cflist
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "cflist " + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+      send_command "cflist"
     end
 
     # Display CloudFront distribution point parameters
     def cfinfo(dist_id) # [cf://DIST_ID]
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "cfinfo " + dist_id.to_s + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+      send_command "cfinfo", dist_id
     end
 
     # Create CloudFront distribution point
     def cfcreate(bucket) # s3://BUCKET
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "cfcreate " + bucket.to_s + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+      send_command "cfcreate", bucket
     end
 
     # Delete CloudFront distribution point
     def cfdelete(dist_id) # cf://DIST_ID
-      tmp = Tempfile.new('tmp')
-      command = option_string() + "cfdelete " + dist_id.to_s + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+      send_command "cfdelete", dist_id
     end
 
     # Change CloudFront distribution point parameters
     def cfmodify(dist_id) # cf://DIST_ID
+      send_command "cfmodify", dist_id
+    end
+
+    def send_command(*command)
       tmp = Tempfile.new('tmp')
-      command = option_string() + "cfmodify " + dist_id.to_s + " 2> " + tmp.path
-      success = system(command)
-      if success
-        begin
-          while (line = tmp.readline)
-            line.chomp
-            selected_string = line
-          end
-        rescue EOFError
-          tmp.close
-        end
-        return selected_string
-      else
-        tmp.close!
-        return success
-      end
+      success = system("#{option_string + command.join(" ") } > #{tmp.path}")
+      return tmp.readlines.map(&:chomp) if success
+      tmp.close!
+
+      success
     end
 
     def show_config
-      option_string()
+      option_string
     end
 
     private
