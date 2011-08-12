@@ -1,5 +1,7 @@
 README for ruby-s3cmd
 =====================
+This is a fork of https://github.com/jjuliano/ruby-s3cmd
+Forked to update and modify the api
 
 Ruby-s3cmd is a gem providing a ruby interface to s3cmd Amazon S3 client.
 
