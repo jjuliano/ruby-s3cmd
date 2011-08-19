@@ -348,6 +348,12 @@
       send_command "cfmodify", dist_id
     end
 
+    def show_config
+      option_string
+    end
+
+    protected
+
     def send_command(*command)
       tmp = Tempfile.new('tmp')
       success = system("#{option_string + command.join(" ") } > #{tmp.path}")
@@ -357,13 +363,7 @@
       success
     end
 
-    def show_config
-      option_string
-    end
-
-    private
-
-    def option_string()
+    def option_string
 
       unless @path_to_s3cmd
         ostring = "s3cmd "
