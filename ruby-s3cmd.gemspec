@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = %q{ruby-s3cmd}
-  s.version = "0.1.2"
-  s.date = %q{2010-01-21}
+  s.version = "0.1.3"
+  s.date = %q{2012-06-13}
   s.authors = ["Joel Bryan Juliano"]
   s.email = %q{joelbryan.juliano@gmail.com}
   s.summary = %q{A gem providing a ruby interface to s3cmd Amazon S3 client.}
