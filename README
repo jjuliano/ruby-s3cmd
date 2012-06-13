@@ -3,10 +3,7 @@ README for ruby-s3cmd
 
 Ruby-s3cmd is a gem providing a ruby interface to s3cmd Amazon S3 client.
 
-To install, type 'gem install ruby-s3cmd-anfleene'
-
-Bundler Usage:
-  gem "ruby-s3cmd-anfleene", :require => "ruby-s3cmd"
+To install, type 'gem install ruby-s3cmd'
 
 Usage:
 
