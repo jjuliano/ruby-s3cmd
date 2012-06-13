@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Ruby-s3cmd : A gem providing a ruby interface to s3cmd Amazon S3 client." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Ruby-s3cmd</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/jjuliano/ruby-s3cmd">View on GitHub</a>
+
+          <h1 id="project_title">Ruby-s3cmd</h1>
+          <h2 id="project_tagline">A gem providing a ruby interface to s3cmd Amazon S3 client.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/jjuliano/ruby-s3cmd/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/jjuliano/ruby-s3cmd/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><code>ruby-s3cmd</code> is a gem providing a ruby interface to <code>s3cmd</code> Amazon S3 client.</p>
+
+<p>To install, type <code>'gem install ruby-s3cmd'</code></p>
+
+<p>Usage:</p>
+
+<pre><code>  require 'rubygems'
+  require 'ruby-s3cmd'
+
+  s3cmd = RubyS3Cmd::S3Cmd.new
+  s3cmd.exclude = "*.jpg"
+  s3cmd.rinclude = "[0-9].*.jpg"
+  s3cmd.show_config
+ =&gt; "s3cmd --exclude *.jpg --rinclude [0-9].*.jpg "
+  s3cmd.sync("/local/path", "s3://test-bucket/backup/")
+</code></pre>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Ruby-s3cmd maintained by <a href="https://github.com/jjuliano">jjuliano</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
