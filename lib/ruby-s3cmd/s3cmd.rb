@@ -373,7 +373,7 @@
 
       self.instance_variables.each do |i|
         tmp_value = self.instance_variable_get "#{i}"
-        tmp_string = i.gsub("_", "-").gsub("@", "--")
+        tmp_string = i.to_s.gsub("_", "-").gsub("@", "--")
         unless tmp_string == "--path-to-s3cmd"
           if (tmp_value.is_a? TrueClass) || (tmp_value.is_a? FalseClass)
             ostring += "#{tmp_string} "
