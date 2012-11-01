@@ -1,7 +1,9 @@
+require File.join(File.dirname(__FILE__), 'lib/ruby-s3cmd/version.rb')
+
 Gem::Specification.new do |s|
   s.name = %q{ruby-s3cmd}
   s.version = RubyS3Cmd::VERSION::STRING
-  s.date = %q{2012-11-1}
+  s.date = %q{2012-11-01}
   s.authors = ["Joel Bryan Juliano"]
   s.email = %q{joelbryan.juliano@gmail.com}
   s.summary = %q{A gem providing a ruby interface to s3cmd Amazon S3 client.}
