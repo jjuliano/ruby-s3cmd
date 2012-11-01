@@ -283,7 +283,7 @@
 
     # Delete file from bucket
     def del(bucket) # s3://BUCKET/OBJECT
-      send_command "del"
+      send_command "del", bucket
     end
 
     # Backup a directory tree to S3
