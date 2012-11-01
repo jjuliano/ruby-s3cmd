@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{ruby-s3cmd}
-  s.version = "0.1.3"
+  s.version = RubyS3Cmd::VERSION::STRING
   s.date = %q{2012-06-13}
   s.authors = ["Joel Bryan Juliano"]
   s.email = %q{joelbryan.juliano@gmail.com}
