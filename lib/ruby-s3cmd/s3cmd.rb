@@ -156,6 +156,11 @@
     # --mime-type option
     #
     attr_accessor :guess_mime_type
+    
+    #
+    # Don't use mime magic when guessing MIME-type.
+    #
+    attr_accessor :no_mime_magic
 
     #
     # Add  a  given  HTTP  header  to the upload request. Can be used multiple times with different header
